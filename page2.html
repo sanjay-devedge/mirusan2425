@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .memory-img {
+            width: 100%;
+            object-cover: cover;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-4xl mx-auto space-y-12">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">JOURNEY OF 2 IDIOTS</h1>
+
+        <!-- Memory 1 -->
+        <div class="flex flex-col md:flex-row items-center bg-white p-4 rounded-lg shadow-lg fade-in md:space-x-6">
+            <a href="./galeery.html">
+                <img src="./assest/us.jpg" alt="Memory 1" class="memory-img w-full md:w-1/2 rounded-lg cursor-pointer">
+            </a>
+            <div class="w-full md:w-1/2 text-center md:text-left">
+                <h2 class="text-2xl font-semibold text-gray-700">First Date</h2>
+                <p class="text-gray-600 mt-2">oii happy Birthday chella kutty in the koringu kutty kudu pona first date ithu tha anikku la ninchu tu iruntha ipadi patta alaga na ponnu enaka nu and first date is alaways special la enikku ipo kuda nayambagam iruku papa..😚</p>
+            </div>
+        </div>
+
+        <!-- Memory 2 -->
+        
+
+<div class="flex flex-col md:flex-row-reverse items-center md:items-start bg-white p-4 rounded-lg shadow-lg fade-in md:justify-between md:space-x-6 md:space-x-reverse ">
+    <a href="./galeery.html" class="w-full md:w-1/2">
+        <img src="./assest/IMG25.jpg" alt="Memory 2" class="memory-img  md:w-full rounded-lg cursor-pointer object-cover   w-full">
+    </a>
+    <div class="w-full md:w-1/2 text-center md:text-left">
+        <h2 class="text-2xl font-semibold text-gray-700">Spiced Up Time</h2>
+        <p class="text-gray-600 mt-2">oii..intha day va maraka mudiyathu di its on of the special day for us naimba enna la asa pata moo future la pananum nu 😳atha ippo va nadaika vacha day ithu🫣</p>
+    </div>
+</div>
+
+
+
+        <!-- Memory 3 -->
+        <div class="flex flex-col md:flex-row items-center bg-white p-4 rounded-lg shadow-lg fade-in md:space-x-6">
+            <a href="./galeery.html">
+                <img src="./assest/IMG3 (2).jpg" alt="Memory 3" class="memory-img w-full md:w-1/2 rounded-lg cursor-pointer ">
+            </a>
+            <div class="w-full md:w-1/2 text-center md:text-left">
+                <h2 class="text-2xl font-semibold text-gray-700">Birthday Baby</h2>
+                <p class="text-gray-600 mt-2">happy Birthday chella kutty epiuma happy ya irupala atha mari iru  and etha pathium think panatha thava ilama unkuda va tha irupa nee ena panalum kutty papa ku support tha panvuva and vitu tu la po matta di poriki 😁</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const fadeInElements = document.querySelectorAll(".fade-in");
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            fadeInElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

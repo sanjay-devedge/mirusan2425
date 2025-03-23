@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>us</title>
+    <link rel="stylesheet" href="./output.css">
+    <style>
+        *{
+            font-family: "dancing  script",cursive;
+        }
+        body {
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+           overflow: hidden;
+           
+        }
+       @keyframes float{
+        0%,100%{
+            transform: translatey(0);
+        }
+        50%{
+            transform: translatey(-10px);
+        }
+       }
+       #box1{
+        animation:float 3s infinite ease-in-out;
+       }
+       #text1{
+        
+        color: #4a2c2c;
+       }
+
+
+       @keyframes heartbeat {
+          0% { transform:scale(1); }
+           50% { transform:scale(1.1); }
+           100% { transform: scale(1); }
+        }
+
+.yes-btn {
+    background-color: #ff66b2;
+    color: white;
+    animation:  heartbeat 1s infinite ;
+}
+
+.no-btn{
+    background-color: #ff4d4d;
+    color: white;
+    transition:0.3s ease-in-out ;
+    position: relative;
+}
+.no-btn:hover{
+    transform:translateX(100px);
+}
+@keyframes fall{
+    0%{
+        transform: translateY(-100vh);scale: 0.5;opacity: 1;
+    }
+    100%{
+        transform: translateY(100vh);scale: 2;opacity:0.5 ;
+    }
+}
+.heart{
+    position: absolute;
+    color: red;
+    animation: fall 4s linear infinite;
+}
+    </style>
+</head>
+<body class="flex justify-center items-center h-screen flex-col" >
+   
+             <div id="box1" class="flex justify-center items-center h-[100px] w-[550px] " >
+                <ul class="flex ">
+                     <li id="text1" class=" text-[50px]  border-pink-500 rounded-[10px] bg-white">Azhagiya marry me?😘</li> 
+                </ul>
+             </div>
+
+             <div class="flex h-[35px]   mt-10">
+                <ul class="flex gap-25 mr-2">
+                    <li class="flex justify-center"><a href="./page2.html" target="_blank">  <button class="yes-btn border-1 border-pink-500  h-[35px] w-[90px] rounded-[7px]">yes💗</button></a> </li>
+                    <li class="flex justify-center"><button class="no-btn border-1 border-pink-500 h-[35px] w-[90px] rounded-[7px] ">no😣</button></li>
+                </ul>
+             </div>
+             <script>
+                function createHeart (){
+                    const heart = document.createElement("div");
+                    heart.classList.add("heart");
+                    heart.innerHTML="🩷";
+                    heart.style.left=Math.random()*100 +"vw"
+                    heart.style.animationDuration=Math.random()*2 + 3 + "s";
+                    document.body.appendChild(heart);
+ 
+                    setTimeout(()=>{
+                        heart.remove();
+                    },2000);
+
+                    
+                };
+                setInterval(createHeart,300);
+
+             </script>
+       
+ 
+</body>
+</html>

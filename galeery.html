@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 IDIOTS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Smooth page fade-in */
+        body {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 1s ease-out, transform 0.8s ease-out;
+            overflow: scroll;
+        }
+        body.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Fireworks canvas */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Image hover effect */
+        .gallery-img {
+            transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.5s ease;
+            z-index: 2;
+            position: relative;
+        }
+        .gallery-img:hover {
+            transform: scale(1.1) rotate(2deg);
+            opacity: 0.9;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Button hover effect */
+        .btn-animate {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        .btn-animate:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <canvas id="fireworks"></canvas> <!-- Fireworks Canvas -->
+
+    <div class="max-w-5xl mx-auto text-center relative z-10">
+        <h1 class="text-4xl font-bold text-gray-800 mb-8">2 IDIOTS</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <img src="./assest/img11.jpg" alt="Memory 1" class="gallery-img w-full rounded-lg shadow-lg fade-in">
+            <img src="./assest/img12.jpg" alt="Memory 2" class="gallery-img w-full rounded-lg shadow-lg fade-in">
+            <img src="./assest/img13.jpg" alt="Memory 3" class="gallery-img w-full rounded-lg shadow-lg fade-in">
+            <img src="./assest/img14.jpg" alt="Memory 4" class="gallery-img w-full rounded-lg shadow-lg fade-in">
+            <img src="./assest/img15.jpg" alt="Memory 5" class="gallery-img w-full rounded-lg shadow-lg fade-in">
+            <img src="./assest/img16.jpg" alt="Memory 6" class="gallery-img w-full rounded-lg shadow-lg fade-in">
+        </div>
+        <a href="page2.html" class="mt-8 inline-block bg-blue-500 text-white py-2 px-4 rounded-lg shadow-lg btn-animate hover:bg-blue-600 transition">
+            Back to Memories
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.body.classList.add("loaded");
+
+            // Fade-in effect on scroll
+            const fadeInElements = document.querySelectorAll(".fade-in");
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            fadeInElements.forEach(el => observer.observe(el));
+
+            // Fireworks Animation
+            const canvas = document.getElementById("fireworks");
+            const ctx = canvas.getContext("2d");
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const fireworks = [];
+
+            function random(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            function Firework(x, y) {
+                this.x = x;
+                this.y = y;
+                this.radius = 2;
+                this.color = `hsl(${random(0, 360)}, 100%, 60%)`;
+                this.vx = random(-3, 3);
+                this.vy = random(-3, 3);
+                this.alpha = 1;
+                this.life = random(60, 100);
+            }
+
+            Firework.prototype.update = function () {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.alpha -= 0.02;
+                this.life--;
+            };
+
+            Firework.prototype.draw = function () {
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            };
+
+            function createFirework() {
+                const x = random(100, canvas.width - 100);
+                const y = random(50, canvas.height / 2);
+                for (let i = 0; i < 30; i++) {
+                    fireworks.push(new Firework(x, y));
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = fireworks.length - 1; i >= 0; i--) {
+                    fireworks[i].update();
+                    fireworks[i].draw();
+                    if (fireworks[i].alpha <= 0 || fireworks[i].life <= 0) {
+                        fireworks.splice(i, 1);
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+
+            setInterval(createFirework, 1000);
+            animate();
+        });
+    </script>
+</body>
+</html>
